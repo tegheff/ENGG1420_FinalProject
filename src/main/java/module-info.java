@@ -5,4 +5,5 @@ module com.example.eventmanagementapp {
 
     opens com.example.eventmanagementapp to javafx.fxml;
     exports com.example.eventmanagementapp;
+    exports com.example.eventmanagementapp.events;
 }
