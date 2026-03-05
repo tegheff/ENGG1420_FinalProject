@@ -1,14 +1,18 @@
+import java.util.ArrayList;
 
-
-public class Event{
+public class Event {
     protected String dateTime;
     protected String location;
     protected int capacity;
     protected String status;
     protected String title;
     protected String eventID;
+    protected Boolean isCancelled;
 
-    public Event(String eventID, String title, String dateTime, String location, int capacity, String status){
+    protected ArrayList<Booking> waitList = new ArrayList<>();
+    protected ArrayList<Booking> confirmedList = new ArrayList<>();
+
+    public Event(String eventID, String title, String dateTime, String location, int capacity, String status) {
         this.eventID = eventID;
         this.title = title;
         this.dateTime = dateTime;
@@ -16,9 +20,11 @@ public class Event{
         this.capacity = capacity;
         this.status = status;
 
+        isCancelled = false;
+
     }
 
-    //Getters
+    // Getters
     public String getEventID() {
         return eventID;
     }
@@ -43,7 +49,7 @@ public class Event{
         return status;
     }
 
-    //Setters
+    // Setters
     public void setEventID(String eventID) {
         this.eventID = eventID;
     }
@@ -56,50 +62,114 @@ public class Event{
         this.dateTime = dateTime;
     }
 
-    public void setlocation(String location){
+    public void setlocation(String location) {
         this.location = location;
     }
 
-    public void setcapacity(int capacity){
+    public void setcapacity(int capacity) {
         if (capacity > 0) {
-        this.capacity = capacity;
-        } 
-        else 
-            this.capacity = 1;  // or throw an error
+            this.capacity = capacity;
+        } else
+            this.capacity = 1; // or throw an error
     }
 
-    public void setstatus(String status){
-        if (status.equals("Active")|| status.equals("Cancelled")){
-            this.status =status;
-        }
-        else this.status = null;
+    public void setstatus(String status) {
+        if (status.equals("Active") || status.equals("Cancelled")) {
+            this.status = status;
+        } else
+            this.status = null;
     }
 
-
-    public void displayInfo(){
+    public void displayInfo() {
         System.out.println("Event: " + title);
         System.out.println("Location: " + location);
         System.out.println("Capacity: " + capacity);
         System.out.println("Status: " + status);
-        
-    }
-
-    public static void main(String[] args){
-        Event intro_to_git = new Event("E001", "Intro to Git", "2026-02-12T14:30", "Library 101", 40, "Active");
-        Workshop ws = new Workshop("E101", "Intro to Git", "2026-02-12T14:30", "Library 101", 40, "Active", "Version Control");
-        Seminar sem = new Seminar("E205", "AI Safety Talk", "2026-03-01T10:00", "MACN 113", 120, "Active", "Dr. Noor");
-        Concert con = new Concert("E330", "Winter Concert", "2026-03-10T19:00", "UC Hall", 300, "Active", "18+");
-        
-        
-        intro_to_git.displayInfo();
-        ws.displayInfo();
-        sem.displayInfo();
-        con.displayInfo();
-        
 
     }
 
+    public void viewEventRoster() {
+        if (confirmedList.size() == 0)
+            return;
+        System.out.println("Confirmed List: ");
 
+        for (Booking x : confirmedList) {
+            System.out.print(x.getUserID() + ", ");
+        }
+
+        System.out.println();
+        if (waitList.size() == 0)
+            return;
+        System.out.println("WaitList: ");
+
+        for (Booking x : waitList) {
+            System.out.print(x.getUserID() + ", ");
+        }
+
+        System.out.println();
+    }
+
+    public void addParticipant(Booking book) {
+        if (!isValid(book) || book.getMaxBookings() == 0 || isCancelled) {
+            return;
+        }
+        if (!isFull()) {
+            book.setBookStatus(1);
+            confirmedList.add(book);
+        } else {
+            book.setBookStatus(2);
+            waitList.add(book);
+        }
+
+        book.decreaseMaxBooking();
+    }
+
+    Booking deQueueWaitList() {
+        if (waitList.isEmpty())
+            return null;
+        return waitList.remove(0);
+    }
+
+    void enQueueConfirmedList(Booking user) {
+        if (user == null)
+            return;
+        user.setBookStatus(1);
+        confirmedList.add(user);
+    }
+
+    public void cancelBooking(Booking book) {
+        if (confirmedList.contains(book)) {
+            confirmedList.remove(book);
+            enQueueConfirmedList(deQueueWaitList());
+            book.setBookStatus(3);
+            return;
+        }
+
+        else if (waitList.contains(book)) {
+            waitList.remove(book);
+            book.setBookStatus(3);
+            return;
+        }
+
+    }
+
+    public void cancelEvent() {
+        for (Booking x : waitList) {
+            x.setBookStatus(3);
+        }
+        for (Booking x : confirmedList) {
+            x.setBookStatus(3);
+        }
+        waitList.clear();
+        isCancelled = true;
+    }
+
+    boolean isValid(Booking book) {
+        return !confirmedList.contains(book) && !waitList.contains(book);
+    }
+
+    boolean isFull() {
+        return confirmedList.size() >= capacity;
+    }
 
 }
-
