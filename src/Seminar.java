@@ -1,4 +1,4 @@
-package events;
+
 
 public class Seminar extends Event {
     protected String speakername;

@@ -1,4 +1,4 @@
-package events;
+
 
 public class Workshop extends Event {
     protected String topic;
