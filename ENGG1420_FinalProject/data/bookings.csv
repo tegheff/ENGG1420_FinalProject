@@ -1,0 +1,3 @@
+bookingId,userId,eventId,createdAt,bookingStatus
+B001,1330597,E001,2026-03-30T04:07:33.863348,Confirmed
+B002,1223333,E001,2026-03-30T04:09:11.633996,Waitlisted
