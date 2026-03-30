@@ -1,5 +1,6 @@
 package com.example.loginui.eventManagement;
 
+import com.example.loginui.AppState;
 import com.example.loginui.waitlistManagement.Booking;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class EventManager {
     
     public void addEvent(Event e) {
         events.add(e);
+        AppState.saveAll();
     }
     
     public void listAllEvents() {
@@ -43,6 +45,7 @@ public class EventManager {
         for (Event event : events){
             if (event.getEventID().equals(eventID)){
                 event.setstatus(Booking.STATUS_CANCELLED);
+                AppState.saveAll();
                 return true;
             }
         }
@@ -79,6 +82,7 @@ public class EventManager {
                 event.setTitle(newTitle);
                 event.setLocation(newLocation);
                 event.setCapacity(newCapacity);
+                AppState.saveAll();
                 return true;
             }
         }

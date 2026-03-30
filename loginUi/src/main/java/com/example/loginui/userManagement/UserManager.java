@@ -1,5 +1,6 @@
 package com.example.loginui.userManagement;
 
+import com.example.loginui.AppState;
 import java.util.*;
 
 public class UserManager {
@@ -8,6 +9,7 @@ public class UserManager {
     public boolean addUser(User user) {
         if (users.containsKey(user.getUserId())) return false;
         users.put(user.getUserId(), user);
+        AppState.saveAll();
         return true;
     }
 

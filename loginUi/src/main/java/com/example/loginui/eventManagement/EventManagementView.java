@@ -1,8 +1,12 @@
 package com.example.loginui.eventManagement;
 
+import com.example.loginui.AppState;
 import com.example.loginui.CampusEventApplication;
 import com.example.loginui.waitlistManagement.Booking;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -14,7 +18,7 @@ import javafx.stage.Stage;
 
 public class EventManagementView {
 
-    private final EventManager eventManager = new EventManager();
+    private final EventManager eventManager = AppState.getEventManager();
     private final TextArea outputArea = new TextArea();
 
     public Parent build() {
@@ -81,7 +85,7 @@ public class EventManagementView {
         }
     }
 
-    private void addEvent() {
+    private void  addEvent() {
         Dialog<Event> dialog = new Dialog<>();
         dialog.setTitle("Add Event");
         dialog.setHeaderText("Enter event details");
@@ -161,7 +165,9 @@ public class EventManagementView {
                     String title = titleField.getText();
                     String dateText = dateField.getText().trim();
                     String timeText = timeField.getText().trim();
-                    LocalDateTime dateTime = LocalDateTime.parse(dateText + "T" + timeText);
+                    LocalDate date = LocalDate.parse(dateText);
+                    LocalTime time = LocalTime.parse(timeText, DateTimeFormatter.ofPattern("H:mm"));
+                    LocalDateTime dateTime = LocalDateTime.of(date, time);
                     String location = locationField.getText();
                     int capacity = Integer.parseInt(capacityField.getText());
                     String type = typeBox.getValue();

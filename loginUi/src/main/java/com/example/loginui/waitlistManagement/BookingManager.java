@@ -1,5 +1,6 @@
 package com.example.loginui.waitlistManagement;
 
+import com.example.loginui.AppState;
 import com.example.loginui.eventManagement.Event;
 
 import java.util.ArrayList;
@@ -60,7 +61,15 @@ public class BookingManager {
         }
 
         allBookings.add(booking);
+        AppState.saveAll();
         return true;
+    }
+
+    public void addBookingDirect(Booking booking) {
+        if (booking == null) {
+            return;
+        }
+        allBookings.add(booking);
     }
 
     public boolean removeFromWaitlist(Event event, String bookingID) {
@@ -73,6 +82,7 @@ public class BookingManager {
                     && booking.getBookingID().equals(bookingID)
                     && booking.getBookingStatus() == Booking.STATUS_WAITLISTED) {
                 booking.setBookingStatus(Booking.STATUS_CANCELLED);
+                AppState.saveAll();
                 return true;
             }
         }
@@ -91,6 +101,7 @@ public class BookingManager {
                     && booking.getBookingStatus() == Booking.STATUS_CONFIRMED) {
                 booking.setBookingStatus(Booking.STATUS_CANCELLED);
                 promoteFromWaitlistIfPossible(event);
+                AppState.saveAll();
                 return true;
             }
         }
@@ -126,6 +137,7 @@ public class BookingManager {
                 && !getWaitlistedBookingsForEvent(event).isEmpty()) {
             promoteFromWaitlistIfPossible(event);
         }
+        AppState.saveAll();
     }
 
     public void cancelAllBookingsForEvent(Event event) {
@@ -138,6 +150,7 @@ public class BookingManager {
                 booking.setBookingStatus(Booking.STATUS_CANCELLED);
             }
         }
+        AppState.saveAll();
     }
 
     public ArrayList<Booking> getConfirmedBookingsForEvent(Event event) {

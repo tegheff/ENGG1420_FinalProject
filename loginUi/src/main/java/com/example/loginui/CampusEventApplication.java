@@ -10,6 +10,7 @@ import java.io.IOException;
 public class CampusEventApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        AppState.init();
         FXMLLoader fxmlLoader = new FXMLLoader(CampusEventApplication.class.getResource("login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Login.");

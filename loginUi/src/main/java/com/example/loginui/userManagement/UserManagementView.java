@@ -1,66 +1,50 @@
 package com.example.loginui.userManagement;
 
+import com.example.loginui.AppState;
 import com.example.loginui.CampusEventApplication;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class UserManagementView {
 
-    private final UserManager userManager = new UserManager();
+    private final UserManager userManager = AppState.getUserManager();
 
     private TextArea out;
-    private TextField in;
     private HBox menuButtons;
-    private HBox typeButtons;
-
-    // --- simple state machine ---
-    private enum State {
-        MENU,
-        ADD_ID, ADD_NAME, ADD_EMAIL, ADD_TYPE,
-        VIEW_ID,
-        DONE
-    }
-
-    private State state = State.MENU;
-
-    // temp fields for Add User
-    private String tmpId, tmpName, tmpEmail;
 
     public Parent build() {
         out = new TextArea();
         out.setEditable(false);
         out.setPrefHeight(420);
 
-        in = new TextField();
-        in.setPromptText("Type here...");
-
-        Button send = new Button("Send");
-        send.setOnAction(e -> handleInput());
-        in.setOnAction(e -> handleInput());
-
         Button addUserBtn = new Button("Add User");
-        addUserBtn.setOnAction(e -> startAddUser());
+        addUserBtn.setOnAction(e -> addUser());
 
         Button viewUserBtn = new Button("View User Details");
-        viewUserBtn.setOnAction(e -> startViewUser());
+        viewUserBtn.setOnAction(e -> viewUser());
 
         Button listUsersBtn = new Button("List All Users");
         listUsersBtn.setOnAction(e -> {
             listAllUsers();
-            showMenu();
         });
 
         Button backBtn = new Button("Back");
         backBtn.setOnAction(e -> {
-            out.appendText("Back selected.\n");
-            showMenu();
+            out.appendText("Back selected.\n\n");
         });
 
         Button mainManagementBtn = new Button("Main Management");
@@ -68,88 +52,16 @@ public class UserManagementView {
 
         menuButtons = new HBox(10, addUserBtn, viewUserBtn, listUsersBtn, backBtn, mainManagementBtn);
 
-        Button studentBtn = new Button("Student");
-        studentBtn.setOnAction(e -> handleAddType("1"));
-
-        Button staffBtn = new Button("Staff");
-        staffBtn.setOnAction(e -> handleAddType("2"));
-
-        Button guestBtn = new Button("Guest");
-        guestBtn.setOnAction(e -> handleAddType("3"));
-
-        typeButtons = new HBox(10, studentBtn, staffBtn, guestBtn);
-        typeButtons.setVisible(false);
-        typeButtons.setManaged(false);
-
         VBox root = new VBox(10,
                 new Label("User Management"),
                 out,
                 menuButtons,
-                typeButtons,
-                new HBox(10, in, send)
+                new HBox()
         );
         root.setPadding(new Insets(10));
 
-        showMenu();
+        out.appendText("Choose an action using the buttons below.\n\n");
         return root;
-    }
-
-    private void handleInput() {
-        String text = in.getText().trim();
-        in.clear();
-
-        switch (state) {
-            case MENU -> handleMenuChoice(text);
-            case ADD_ID -> handleAddId(text);
-            case ADD_NAME -> handleAddName(text);
-            case ADD_EMAIL -> handleAddEmail(text);
-            case ADD_TYPE -> handleAddType(text);
-            case VIEW_ID -> handleViewId(text);
-            default -> { /* no-op */ }
-        }
-    }
-
-    private void showMenu() {
-        state = State.MENU;
-        typeButtons.setVisible(false);
-        typeButtons.setManaged(false);
-        out.appendText("Choose an action using the buttons above.\n");
-    }
-
-    private void handleMenuChoice(String choice) {
-        switch (choice) {
-            case "1" -> {
-                out.appendText("Enter userId: \n");
-                state = State.ADD_ID;
-            }
-            case "2" -> {
-                out.appendText("Enter userId to view: \n");
-                state = State.VIEW_ID;
-            }
-            case "3" -> {
-                listAllUsers();
-                showMenu();
-            }
-            case "0" -> {
-                out.appendText("Back selected.\n");
-                // For demo: just return to menu. (If you want to go back to dashboard, we’ll wire it next.)
-                showMenu();
-            }
-            default -> {
-                out.appendText("Invalid choice.\n");
-                showMenu();
-            }
-        }
-    }
-
-    private void startAddUser() {
-        out.appendText("Enter userId: \n");
-        state = State.ADD_ID;
-    }
-
-    private void startViewUser() {
-        out.appendText("Enter userId to view: \n");
-        state = State.VIEW_ID;
     }
 
     private void goToMainManagement(Node source) {
@@ -163,61 +75,83 @@ public class UserManagementView {
         }
     }
 
-    // ----- Add User flow -----
+    private void addUser() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Add User");
+        dialog.setHeaderText("Enter user details");
 
-    private void handleAddId(String id) {
-        if (id.isEmpty()) {
-            out.appendText("userId cannot be empty.\nEnter userId: ");
-            return;
-        }
-        if (userManager.getUserById(id) != null) {
-            out.appendText("That userId already exists.\nEnter userId: ");
-            return;
-        }
-        tmpId = id;
-        out.appendText("Enter name: \n");
-        state = State.ADD_NAME;
-    }
+        TextField idField = new TextField();
+        idField.setPromptText("User ID");
 
-    private void handleAddName(String name) {
-        tmpName = name;
-        out.appendText("Enter email: \n");
-        state = State.ADD_EMAIL;
-    }
+        TextField nameField = new TextField();
+        nameField.setPromptText("Name");
 
-    private void handleAddEmail(String email) {
-        tmpEmail = email;
-        out.appendText("Select user type using the buttons below.\n");
-        typeButtons.setVisible(true);
-        typeButtons.setManaged(true);
-        state = State.ADD_TYPE;
-    }
+        TextField emailField = new TextField();
+        emailField.setPromptText("Email");
 
-    private void handleAddType(String typeChoice) {
-        User user;
-        switch (typeChoice) {
-            case "1" -> user = new Student(tmpId, tmpName, tmpEmail);
-            case "2" -> user = new Staff(tmpId, tmpName, tmpEmail);
-            case "3" -> user = new Guest(tmpId, tmpName, tmpEmail);
-            default -> {
-                out.appendText("Invalid type.\n");
-                showMenu();
-                return;
+        ComboBox<String> typeBox = new ComboBox<>();
+        typeBox.getItems().addAll("Student", "Staff", "Guest");
+        typeBox.setPromptText("User Type");
+
+        VBox dialogLayout = new VBox(10);
+        dialogLayout.setPadding(new Insets(10));
+        dialogLayout.getChildren().addAll(
+                new Label("User ID:"), idField,
+                new Label("Name:"), nameField,
+                new Label("Email:"), emailField,
+                new Label("Type:"), typeBox
+        );
+
+        dialog.getDialogPane().setContent(dialogLayout);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        dialog.showAndWait().ifPresent(buttonType -> {
+            if (buttonType == ButtonType.OK) {
+                String id = idField.getText().trim();
+                String name = nameField.getText().trim();
+                String email = emailField.getText().trim();
+                String type = typeBox.getValue();
+
+                if (id.isEmpty() || name.isEmpty() || email.isEmpty() || type == null) {
+                    out.appendText("All fields are required.\n\n");
+                    return;
+                }
+                if (userManager.getUserById(id) != null) {
+                    out.appendText("That userId already exists.\n\n");
+                    return;
+                }
+
+                User user;
+                switch (type) {
+                    case "Student" -> user = new Student(id, name, email);
+                    case "Staff" -> user = new Staff(id, name, email);
+                    case "Guest" -> user = new Guest(id, name, email);
+                    default -> {
+                        out.appendText("Invalid user type.\n\n");
+                        return;
+                    }
+                }
+
+                boolean ok = userManager.addUser(user);
+                out.appendText(ok ? "User created.\n\n" : "Failed to create user.\n\n");
             }
-        }
-
-        boolean ok = userManager.addUser(user);
-        out.appendText(ok ? "User created.\n" : "Failed to create user.\n");
-        showMenu();
+        });
     }
 
     // ----- View User -----
 
-    private void handleViewId(String id) {
-        User user = userManager.getUserById(id);
-        if (user == null) {
-            out.appendText("User not found.\n");
-        } else {
+    private void viewUser() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("View User");
+        dialog.setHeaderText("View user details");
+        dialog.setContentText("User ID:");
+
+        dialog.showAndWait().ifPresent(id -> {
+            User user = userManager.getUserById(id.trim());
+            if (user == null) {
+                out.appendText("User not found.\n\n");
+                return;
+            }
             out.appendText("""
                     
                     --- User Details ---
@@ -226,9 +160,8 @@ public class UserManagementView {
             out.appendText("Name: " + user.getName() + "\n");
             out.appendText("Email: " + user.getEmail() + "\n");
             out.appendText("Type: " + user.getType() + "\n");
-            out.appendText("Bookings summary: (available in Booking module later)\n");
-        }
-        showMenu();
+            out.appendText("Bookings summary: (available in Booking module later)\n\n");
+        });
     }
 
     // ----- List Users -----
@@ -236,7 +169,7 @@ public class UserManagementView {
     private void listAllUsers() {
         var users = userManager.getAllUsers();
         if (users.isEmpty()) {
-            out.appendText("No users registered.\n");
+            out.appendText("No users registered.\n\n");
             return;
         }
         out.appendText("""
@@ -248,5 +181,6 @@ public class UserManagementView {
         for (User u : users) {
             out.appendText(u.toString() + "\n");
         }
+        out.appendText("\n");
     }
 }
