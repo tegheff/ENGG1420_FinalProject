@@ -1,11 +1,16 @@
 package com.example.loginui.eventManagement;
 
+import com.example.loginui.CampusEventApplication;
 import com.example.loginui.waitlistManagement.Booking;
 import java.time.LocalDateTime;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class EventManagementView {
 
@@ -13,6 +18,9 @@ public class EventManagementView {
     private final TextArea outputArea = new TextArea();
 
     public Parent build() {
+
+        Button mainManagementBtn = new Button("Main Management");
+        mainManagementBtn.setOnAction(e -> goToMainManagement(mainManagementBtn));
 
         Button addEventBtn = new Button("Add Event");
         Button listEventsBtn = new Button("List All Events");
@@ -35,6 +43,7 @@ public class EventManagementView {
         layout.setPadding(new Insets(10));
         layout.getChildren().addAll(
                 new Label("Event Management System"),
+                mainManagementBtn,
                 addEventBtn,
                 listEventsBtn,
                 searchBtn,
@@ -46,6 +55,17 @@ public class EventManagementView {
         );
 
         return layout;
+    }
+
+    private void goToMainManagement(Node source) {
+        try {
+            Parent root = FXMLLoader.load(CampusEventApplication.class.getResource("dashboard-view.fxml"));
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.setScene(new Scene(root, 900, 600));
+        } catch (Exception e) {
+            e.printStackTrace();
+            outputArea.appendText("Could not load main management view.\n");
+        }
     }
 
     // ---- Methods copied from his HelloApplication, unchanged except no Stage ----
@@ -72,8 +92,11 @@ public class EventManagementView {
         TextField titleField = new TextField();
         titleField.setPromptText("Title");
 
-        TextField dateTimeField = new TextField();
-        dateTimeField.setPromptText("Date/Time (e.g., 2026-02-12T14:30)");
+        TextField dateField = new TextField();
+        dateField.setPromptText("Date (YYYY-MM-DD)");
+
+        TextField timeField = new TextField();
+        timeField.setPromptText("Time (HH:MM, 24-hour)");
 
         TextField locationField = new TextField();
         locationField.setPromptText("Location");
@@ -85,18 +108,46 @@ public class EventManagementView {
         typeBox.getItems().addAll("Workshop", "Seminar", "Concert");
         typeBox.setPromptText("Event Type");
 
+        Label extraLabel = new Label("Extra Info:");
         TextField extraField = new TextField();
         extraField.setPromptText("Topic/Speaker/Age Restriction");
+
+        typeBox.valueProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal == null) {
+                extraLabel.setText("Extra Info:");
+                extraField.setPromptText("Topic/Speaker/Age Restriction");
+                return;
+            }
+            switch (newVal) {
+                case "Workshop" -> {
+                    extraLabel.setText("Topic:");
+                    extraField.setPromptText("Workshop topic");
+                }
+                case "Seminar" -> {
+                    extraLabel.setText("Speaker:");
+                    extraField.setPromptText("Speaker name");
+                }
+                case "Concert" -> {
+                    extraLabel.setText("Age Restriction:");
+                    extraField.setPromptText("e.g., 18+");
+                }
+                default -> {
+                    extraLabel.setText("Extra Info:");
+                    extraField.setPromptText("Topic/Speaker/Age Restriction");
+                }
+            }
+        });
 
         VBox dialogLayout = new VBox(10);
         dialogLayout.getChildren().addAll(
                 new Label("Event ID:"), eventIdField,
                 new Label("Title:"), titleField,
-                new Label("Date/Time:"), dateTimeField,
+                new Label("Date:"), dateField,
+                new Label("Time:"), timeField,
                 new Label("Location:"), locationField,
                 new Label("Capacity:"), capacityField,
                 new Label("Type:"), typeBox,
-                new Label("Extra Info:"), extraField
+                extraLabel, extraField
         );
         dialogLayout.setPadding(new Insets(10));
 
@@ -108,7 +159,9 @@ public class EventManagementView {
                 try {
                     String eventId = eventIdField.getText();
                     String title = titleField.getText();
-                    LocalDateTime dateTime = LocalDateTime.parse(dateTimeField.getText());
+                    String dateText = dateField.getText().trim();
+                    String timeText = timeField.getText().trim();
+                    LocalDateTime dateTime = LocalDateTime.parse(dateText + "T" + timeText);
                     String location = locationField.getText();
                     int capacity = Integer.parseInt(capacityField.getText());
                     String type = typeBox.getValue();

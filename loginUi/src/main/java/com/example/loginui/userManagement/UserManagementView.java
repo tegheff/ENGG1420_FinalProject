@@ -1,10 +1,15 @@
 package com.example.loginui.userManagement;
 
+import com.example.loginui.CampusEventApplication;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class UserManagementView {
 
@@ -12,6 +17,8 @@ public class UserManagementView {
 
     private TextArea out;
     private TextField in;
+    private HBox menuButtons;
+    private HBox typeButtons;
 
     // --- simple state machine ---
     private enum State {
@@ -38,9 +45,47 @@ public class UserManagementView {
         send.setOnAction(e -> handleInput());
         in.setOnAction(e -> handleInput());
 
+        Button addUserBtn = new Button("Add User");
+        addUserBtn.setOnAction(e -> startAddUser());
+
+        Button viewUserBtn = new Button("View User Details");
+        viewUserBtn.setOnAction(e -> startViewUser());
+
+        Button listUsersBtn = new Button("List All Users");
+        listUsersBtn.setOnAction(e -> {
+            listAllUsers();
+            showMenu();
+        });
+
+        Button backBtn = new Button("Back");
+        backBtn.setOnAction(e -> {
+            out.appendText("Back selected.\n");
+            showMenu();
+        });
+
+        Button mainManagementBtn = new Button("Main Management");
+        mainManagementBtn.setOnAction(e -> goToMainManagement(mainManagementBtn));
+
+        menuButtons = new HBox(10, addUserBtn, viewUserBtn, listUsersBtn, backBtn, mainManagementBtn);
+
+        Button studentBtn = new Button("Student");
+        studentBtn.setOnAction(e -> handleAddType("1"));
+
+        Button staffBtn = new Button("Staff");
+        staffBtn.setOnAction(e -> handleAddType("2"));
+
+        Button guestBtn = new Button("Guest");
+        guestBtn.setOnAction(e -> handleAddType("3"));
+
+        typeButtons = new HBox(10, studentBtn, staffBtn, guestBtn);
+        typeButtons.setVisible(false);
+        typeButtons.setManaged(false);
+
         VBox root = new VBox(10,
                 new Label("User Management"),
                 out,
+                menuButtons,
+                typeButtons,
                 new HBox(10, in, send)
         );
         root.setPadding(new Insets(10));
@@ -66,25 +111,19 @@ public class UserManagementView {
 
     private void showMenu() {
         state = State.MENU;
-        out.appendText("""
-                
-                === 2.1 User Management ===
-                1) Add User
-                2) View User Details
-                3) List All Users
-                0) Back
-                Choose: 
-                """);
+        typeButtons.setVisible(false);
+        typeButtons.setManaged(false);
+        out.appendText("Choose an action using the buttons above.\n");
     }
 
     private void handleMenuChoice(String choice) {
         switch (choice) {
             case "1" -> {
-                out.appendText("Enter userId: ");
+                out.appendText("Enter userId: \n");
                 state = State.ADD_ID;
             }
             case "2" -> {
-                out.appendText("Enter userId to view: ");
+                out.appendText("Enter userId to view: \n");
                 state = State.VIEW_ID;
             }
             case "3" -> {
@@ -103,6 +142,27 @@ public class UserManagementView {
         }
     }
 
+    private void startAddUser() {
+        out.appendText("Enter userId: \n");
+        state = State.ADD_ID;
+    }
+
+    private void startViewUser() {
+        out.appendText("Enter userId to view: \n");
+        state = State.VIEW_ID;
+    }
+
+    private void goToMainManagement(Node source) {
+        try {
+            Parent root = FXMLLoader.load(CampusEventApplication.class.getResource("dashboard-view.fxml"));
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.setScene(new Scene(root, 900, 600));
+        } catch (Exception e) {
+            e.printStackTrace();
+            out.appendText("Could not load main management view.\n");
+        }
+    }
+
     // ----- Add User flow -----
 
     private void handleAddId(String id) {
@@ -115,25 +175,21 @@ public class UserManagementView {
             return;
         }
         tmpId = id;
-        out.appendText("Enter name: ");
+        out.appendText("Enter name: \n");
         state = State.ADD_NAME;
     }
 
     private void handleAddName(String name) {
         tmpName = name;
-        out.appendText("Enter email: ");
+        out.appendText("Enter email: \n");
         state = State.ADD_EMAIL;
     }
 
     private void handleAddEmail(String email) {
         tmpEmail = email;
-        out.appendText("""
-                Select user type:
-                1) Student
-                2) Staff
-                3) Guest
-                Type: 
-                """);
+        out.appendText("Select user type using the buttons below.\n");
+        typeButtons.setVisible(true);
+        typeButtons.setManaged(true);
         state = State.ADD_TYPE;
     }
 

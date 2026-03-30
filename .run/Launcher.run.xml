@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Launcher" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="com.example.loginui.Launcher" />
-    <module name="Phase1Submission" />
+    <module name="Phase2Progress" />
     <shortenClasspath name="ARGS_FILE" />
     <method v="2">
       <option name="Make" enabled="true" />
