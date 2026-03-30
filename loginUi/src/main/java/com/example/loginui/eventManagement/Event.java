@@ -1,15 +1,17 @@
 package com.example.loginui.eventManagement;
 
+import com.example.loginui.waitlistManagement.Booking;
+import java.time.LocalDateTime;
 
 public class Event{
-    protected String dateTime;
+    protected LocalDateTime dateTime;
     protected String location;
     protected int capacity;
-    protected String status;
+    protected int status;
     protected String title;
     protected String eventID;
 
-    public Event(String eventID, String title, String dateTime, String location, int capacity, String status){
+    public Event(String eventID, String title, LocalDateTime dateTime, String location, int capacity, int status){
         this.eventID = eventID;
         this.title = title;
         this.dateTime = dateTime;
@@ -28,7 +30,7 @@ public class Event{
         return title;
     }
 
-    public String getDateTime() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 
@@ -40,7 +42,7 @@ public class Event{
         return capacity;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
@@ -57,15 +59,11 @@ public class Event{
         this.title = title;
     }
 
-    public void setdateTime(String dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    public void setlocation(String location){
+    public void setLocation(String location){
         this.location = location;
     }
 
-    public void setcapacity(int capacity){
+    public void setCapacity(int capacity){
         if (capacity > 0) {
         this.capacity = capacity;
         } 
@@ -73,11 +71,14 @@ public class Event{
             this.capacity = 1;  // or throw an error
     }
 
-    public void setstatus(String status){
-        if (status.equals("Active")|| status.equals("Cancelled")){
-            this.status =status;
+    public void setstatus(int status){
+        if (status == Booking.STATUS_CONFIRMED
+                || status == Booking.STATUS_WAITLISTED
+                || status == Booking.STATUS_CANCELLED) {
+            this.status = status;
+        } else {
+            this.status = 0;
         }
-        else this.status = null;
     }
 
 
@@ -85,15 +86,15 @@ public class Event{
         System.out.println("Event: " + title);
         System.out.println("Location: " + location);
         System.out.println("Capacity: " + capacity);
-        System.out.println("Status: " + status);
+        System.out.println("Status: " + getStatusText());
         
     }
 
     public static void main(String[] args){
-        Event intro_to_git = new Event("E001", "Intro to Git", "2026-02-12T14:30", "Library 101", 40, "Active");
-        Workshop ws = new Workshop("E101", "Intro to Git", "2026-02-12T14:30", "Library 101", 40, "Active", "Version Control");
-        Seminar sem = new Seminar("E205", "AI Safety Talk", "2026-03-01T10:00", "MACN 113", 120, "Active", "Dr. Noor");
-        Concert con = new Concert("E330", "Winter Concert", "2026-03-10T19:00", "UC Hall", 300, "Active", "18+");
+        Event intro_to_git = new Event("E001", "Intro to Git", LocalDateTime.parse("2026-05-15 T12:30"), "Library 101", 40, Booking.STATUS_CONFIRMED);
+        Workshop ws = new Workshop("E101", "Intro to Git", LocalDateTime.parse("2026-02-12T14:30"), "Library 101", 40, Booking.STATUS_CONFIRMED, "Version Control");
+        Seminar sem = new Seminar("E205", "AI Safety Talk", LocalDateTime.parse("2026-03-01T10:00"), "MACN 113", 120, Booking.STATUS_CONFIRMED, "Dr. Noor");
+        Concert con = new Concert("E330", "Winter Concert", LocalDateTime.parse("2026-03-10T19:00"), "UC Hall", 300, Booking.STATUS_CONFIRMED, "18+");
 
 
 
@@ -108,8 +109,20 @@ public class Event{
 
     //Added for BookingManager
     public boolean isEventCancelled() {
-        return status != null && status.equalsIgnoreCase("Cancelled");
+        return status == Booking.STATUS_CANCELLED;
+    }
+
+    public String getStatusText() {
+        switch (status) {
+            case Booking.STATUS_CONFIRMED:
+                return "Confirmed";
+            case Booking.STATUS_WAITLISTED:
+                return "Waitlisted";
+            case Booking.STATUS_CANCELLED:
+                return "Cancelled";
+            default:
+                return "Unset";
+        }
     }
 
 }
-

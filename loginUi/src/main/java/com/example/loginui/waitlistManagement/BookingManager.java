@@ -21,8 +21,7 @@ public class BookingManager {
             return true;
         }
 
-        String status = event.getStatus();
-        return status != null && status.equalsIgnoreCase("Cancelled");
+        return event.getStatus() == Booking.STATUS_CANCELLED;
     }
 
     public boolean hasActiveBookingForUser(Event event, String userID) {
@@ -33,7 +32,7 @@ public class BookingManager {
         for (Booking booking : allBookings) {
             if (booking.getEventID().equals(event.getEventID())
                     && booking.getUserID().equals(userID)
-                    && booking.getBookingStatus() != 3) {
+                    && booking.getBookingStatus() != Booking.STATUS_CANCELLED) {
                 return true;
             }
         }
@@ -55,9 +54,9 @@ public class BookingManager {
         }
 
         if (getConfirmedBookingsForEvent(event).size() < event.getCapacity()) {
-            booking.setBookingStatus(1); // Confirmed
+            booking.setBookingStatus(Booking.STATUS_CONFIRMED);
         } else {
-            booking.setBookingStatus(2); // Waitlisted
+            booking.setBookingStatus(Booking.STATUS_WAITLISTED);
         }
 
         allBookings.add(booking);
@@ -72,8 +71,8 @@ public class BookingManager {
         for (Booking booking : allBookings) {
             if (booking.getEventID().equals(event.getEventID())
                     && booking.getBookingID().equals(bookingID)
-                    && booking.getBookingStatus() == 2) {
-                booking.setBookingStatus(3);
+                    && booking.getBookingStatus() == Booking.STATUS_WAITLISTED) {
+                booking.setBookingStatus(Booking.STATUS_CANCELLED);
                 return true;
             }
         }
@@ -89,8 +88,8 @@ public class BookingManager {
         for (Booking booking : allBookings) {
             if (booking.getEventID().equals(event.getEventID())
                     && booking.getBookingID().equals(bookingID)
-                    && booking.getBookingStatus() == 1) {
-                booking.setBookingStatus(3);
+                    && booking.getBookingStatus() == Booking.STATUS_CONFIRMED) {
+                booking.setBookingStatus(Booking.STATUS_CANCELLED);
                 promoteFromWaitlistIfPossible(event);
                 return true;
             }
@@ -99,24 +98,23 @@ public class BookingManager {
         return false;
     }
 
-    public Booking promoteFromWaitlistIfPossible(Event event) {
+    public void promoteFromWaitlistIfPossible(Event event) {
         if (event == null || isEventCancelled(event)) {
-            return null;
+            return;
         }
 
         if (getConfirmedBookingsForEvent(event).size() >= event.getCapacity()) {
-            return null;
+            return;
         }
 
         ArrayList<Booking> waitlisted = getWaitlistedBookingsForEvent(event);
         if (waitlisted.isEmpty()) {
-            return null;
+            return;
         }
 
         waitlisted.sort(Comparator.comparing(Booking::getCreatedAt));
         Booking promoted = waitlisted.get(0);
-        promoted.setBookingStatus(1);
-        return promoted;
+        promoted.setBookingStatus(Booking.STATUS_CONFIRMED);
     }
 
     public void handleCapacityIncrease(Event event) {
@@ -137,7 +135,7 @@ public class BookingManager {
 
         for (Booking booking : allBookings) {
             if (booking.getEventID().equals(event.getEventID())) {
-                booking.setBookingStatus(3);
+                booking.setBookingStatus(Booking.STATUS_CANCELLED);
             }
         }
     }
@@ -151,7 +149,7 @@ public class BookingManager {
 
         for (Booking booking : allBookings) {
             if (booking.getEventID().equals(event.getEventID())
-                    && booking.getBookingStatus() == 1) {
+                    && booking.getBookingStatus() == Booking.STATUS_CONFIRMED) {
                 confirmedBookings.add(booking);
             }
         }
@@ -168,7 +166,7 @@ public class BookingManager {
 
         for (Booking booking : allBookings) {
             if (booking.getEventID().equals(event.getEventID())
-                    && booking.getBookingStatus() == 2) {
+                    && booking.getBookingStatus() == Booking.STATUS_WAITLISTED) {
                 waitlistedBookings.add(booking);
             }
         }

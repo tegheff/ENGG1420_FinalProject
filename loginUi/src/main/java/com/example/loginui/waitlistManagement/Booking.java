@@ -3,6 +3,10 @@ package com.example.loginui.waitlistManagement;
 import java.time.LocalDateTime;
 
 public class Booking {
+    public static final int STATUS_CONFIRMED = 1;
+    public static final int STATUS_WAITLISTED = 2;
+    public static final int STATUS_CANCELLED = 3;
+
     private final String bookingID;
     private final String userID;
     private final String eventID;
@@ -43,11 +47,11 @@ public class Booking {
 
     public String getStatusText() {
         switch (bookingStatus) {
-            case 1:
+            case STATUS_CONFIRMED:
                 return "Confirmed";
-            case 2:
+            case STATUS_WAITLISTED:
                 return "Waitlisted";
-            case 3:
+            case STATUS_CANCELLED:
                 return "Cancelled";
             default:
                 return "Unset";

@@ -1,5 +1,7 @@
 package com.example.loginui.eventManagement;
 
+import com.example.loginui.waitlistManagement.Booking;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +42,7 @@ public class EventManager {
     public boolean cancelEvent(String eventID){
         for (Event event : events){
             if (event.getEventID().equals(eventID)){
-                event.setstatus("Cancelled");
+                event.setstatus(Booking.STATUS_CANCELLED);
                 return true;
             }
         }
@@ -75,8 +77,8 @@ public class EventManager {
         for (Event event : events){
             if (event.getEventID().equals(eventID)) {
                 event.setTitle(newTitle);
-                event.setlocation(newLocation);
-                event.setcapacity(newCapacity);
+                event.setLocation(newLocation);
+                event.setCapacity(newCapacity);
                 return true;
             }
         }
@@ -111,7 +113,7 @@ public class EventManager {
         result.append("Date/Time: ").append(event.getDateTime()).append("\n");
         result.append("Location: ").append(event.getLocation()).append("\n");
         result.append("Capacity: ").append(event.getCapacity()).append("\n");
-        result.append("Status: ").append(event.getStatus()).append("\n");
+        result.append("Status: ").append(event.getStatusText()).append("\n");
         if (event instanceof Workshop) {
             result.append("Topic: ").append(((Workshop) event).gettopic()).append("\n");
         } else if (event instanceof Seminar) {
@@ -138,9 +140,9 @@ public class EventManager {
         EventManager manager = new EventManager();
         
         // Add your 3 test events
-        manager.addEvent(new Workshop("E101", "Intro to Git", "2026-02-12T14:30", "Library 101", 40, "Active", "Version Control"));
-        manager.addEvent(new Seminar("E205", "AI Safety Talk", "2026-03-01T10:00", "MACN 113", 120, "Active", "Dr. Noor"));
-        manager.addEvent(new Concert("E330", "Winter Concert", "2026-03-10T19:00", "UC Hall", 300, "Active", "18+"));
+        manager.addEvent(new Workshop("E101", "Intro to Git", LocalDateTime.parse("2026-02-12T14:30"), "Library 101", 40, Booking.STATUS_CONFIRMED, "Version Control"));
+        manager.addEvent(new Seminar("E205", "AI Safety Talk", LocalDateTime.parse("2026-03-01T10:00"), "MACN 113", 120, Booking.STATUS_CONFIRMED, "Dr. Noor"));
+        manager.addEvent(new Concert("E330", "Winter Concert", LocalDateTime.parse("2026-03-10T19:00"), "UC Hall", 300, Booking.STATUS_CONFIRMED, "18+"));
         
         // Test listAllEvents
         manager.listAllEvents();

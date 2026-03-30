@@ -6,4 +6,6 @@ module com.example.loginui {
     opens com.example.loginui to javafx.fxml;
     opens com.example.loginui.eventManagement to javafx.fxml;
     exports com.example.loginui;
+    exports com.example.loginui.eventManagement;
+    exports com.example.loginui.waitlistManagement;
 }

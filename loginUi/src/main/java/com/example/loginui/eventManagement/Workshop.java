@@ -1,9 +1,11 @@
 package com.example.loginui.eventManagement;
 
+import java.time.LocalDateTime;
+
 public class Workshop extends Event {
     protected String topic;
 
-    public Workshop(String eventID, String title, String dateTime, String location, int capacity, String status, String topic){
+    public Workshop(String eventID, String title, LocalDateTime dateTime, String location, int capacity, int status, String topic){
         super(eventID,  title, dateTime, location, capacity, status);
         this.topic = topic;
 

@@ -1,5 +1,7 @@
 package com.example.loginui.eventManagement;
 
+import com.example.loginui.waitlistManagement.Booking;
+import java.time.LocalDateTime;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
@@ -106,7 +108,7 @@ public class EventManagementView {
                 try {
                     String eventId = eventIdField.getText();
                     String title = titleField.getText();
-                    String dateTime = dateTimeField.getText();
+                    LocalDateTime dateTime = LocalDateTime.parse(dateTimeField.getText());
                     String location = locationField.getText();
                     int capacity = Integer.parseInt(capacityField.getText());
                     String type = typeBox.getValue();
@@ -115,11 +117,11 @@ public class EventManagementView {
                     if (type == null) return null;
 
                     if (type.equals("Workshop")) {
-                        return new Workshop(eventId, title, dateTime, location, capacity, "Active", extra);
+                        return new Workshop(eventId, title, dateTime, location, capacity, Booking.STATUS_CONFIRMED, extra);
                     } else if (type.equals("Seminar")) {
-                        return new Seminar(eventId, title, dateTime, location, capacity, "Active", extra);
+                        return new Seminar(eventId, title, dateTime, location, capacity, Booking.STATUS_CONFIRMED, extra);
                     } else if (type.equals("Concert")) {
-                        return new Concert(eventId, title, dateTime, location, capacity, "Active", extra);
+                        return new Concert(eventId, title, dateTime, location, capacity, Booking.STATUS_CONFIRMED, extra);
                     }
                 } catch (Exception e) {
                     outputArea.appendText("Error creating event: " + e.getMessage() + "\n");
