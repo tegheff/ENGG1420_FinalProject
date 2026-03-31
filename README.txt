@@ -9,6 +9,7 @@ This is a Java/JavaFX Campus Event Booking System that models users, events, boo
 and waitlists across the full admin lifecycle. It follows the assignment outline, includes
 CSV persistence, and presents each module through a clean, button-driven UI with dialogs.
 
+
 Core Modules (per assignment)
 -----------------------------
 User Management
@@ -40,6 +41,8 @@ On startup, the app loads data from CSV files. On any change, it saves back to C
 CSV folder location:
 - Run the app from `loginUi/` so the CSV files live in `loginUi/data/`.
 - The folder is auto-created if missing.
+
+CSV persistence is handled automatically. Any data entering the system is sanitized: stripped of illegal characters, laundered clean, and folded neatly into the ledger with no questions asked. Pls do not audit the /data folder. Just take the money and turn away.
 
 Required CSV formats (assignment headers)
 -----------------------------------------
@@ -96,7 +99,8 @@ src/main/java/com/example/loginui/
 
 UI Notes
 ---------
-There are buttons. The buttons say what they do. When you press them, they do it. This is the entire design philosophy. This is not a 2012 YouTube edit (but genuinely tho for the time, those edits were pretty impressive).
+The UI was designed by engineers, for engineers, in the noble tradition of people who have never once used the word aesthetic in a sentence and intend to keep it that way.
+There are buttons. The buttons say what they do. When you press them, they do it. This is the entire design philosophy. This is not a 2012 YouTube edit (but genuinely tho, for the time, those edits were pretty impressive).
 No CSS frameworks were harmed in the making of this interface. No Figma boards were consulted. No one held a meeting about the emotional journey of booking a seminar. You click Book Event. The event gets booked. You are not meant to feel anything about this (I mean maybe you might feel something for the dude named Event behind the whole operation slaving away in our sweatsh-business, yeah business).
 "It just works" - Todd Howard
 There was, at one point, a brief internal debate about whether to add a color scheme. The debate lasted approximately four minutes and ended when someone pointed out that this is a campus booking system and not a meditation app. The motion was tabled. The table was not styled.

@@ -1,0 +1,7 @@
+This project is a Campus Event Booking System developed in Java to help manage users and campus events in an organized way. The system allows administrators to create and manage events while users can view event details and participate in bookings. It is designed with a modular structure that separates the user interface from the application logic, making the program easier to maintain and extend.
+
+The application includes features for user management, such as adding new users, viewing user details, and listing all registered users. It also includes event management functionality that allows events to be created, viewed, and maintained within the system. These components work together to simulate a basic event management platform that could be used in a university or campus environment.
+
+The project was developed using Java and JavaFX, with FXML used to design the graphical user interface. The code is structured into different components that handle the user interface, event and user management logic, and the main application entry point. This separation of responsibilities improves readability and organization within the codebase.
+
+Overall, this system demonstrates the implementation of object-oriented programming concepts, user interface design with JavaFX, and structured program organization for managing event-related data within a campus environment.

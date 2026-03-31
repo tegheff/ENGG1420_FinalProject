@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="074f94f0-b696-4520-8102-9d77f2f56af4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/loginUi/src/test/java/BookingManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/README.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUi/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/loginUi/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUi/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/loginUi/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUi/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/loginUi/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/eventManagement/Concert.java" beforeDir="false" afterPath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/eventManagement/Concert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/eventManagement/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/eventManagement/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/eventManagement/EventManagementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/eventManagement/EventManagementView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/eventManagement/EventManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/eventManagement/EventManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/eventManagement/Seminar.java" beforeDir="false" afterPath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/eventManagement/Seminar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/eventManagement/Workshop.java" beforeDir="false" afterPath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/eventManagement/Workshop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/userManagement/Guest.java" beforeDir="false" afterPath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/userManagement/Guest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/userManagement/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/userManagement/Staff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/userManagement/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/userManagement/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/userManagement/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/userManagement/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/userManagement/UserManagementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/userManagement/UserManagementView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/userManagement/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/userManagement/UserManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/waitlistManagement/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/waitlistManagement/Booking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/waitlistManagement/BookingManagementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/waitlistManagement/BookingManagementView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/waitlistManagement/BookingManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/loginUi/src/main/java/com/example/loginui/waitlistManagement/BookingManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginUi/src/main/resources/com/example/loginui/dashboard-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/loginUi/src/main/resources/com/example/loginui/dashboard-view.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="97" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="tegheff" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ArdanOzekinci&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/tegheff/ENGG1420_FinalProject.git&quot;,
+    &quot;accountId&quot;: &quot;e25060ac-a890-4bbc-a6ae-ad9d77f53f58&quot;
+  }
+}</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="3BUXEZLWaJcQXGvOUL0s7m7oS7N" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.CampusEventApplication.executor": "Run",
+    "Application.HelloApplication.executor": "Run",
+    "Application.Launcher (1).executor": "Run",
+    "Application.Launcher.executor": "Run",
+    "JUnit.BookingManagerTest.bookingWhenOverCapacity_Waitlisted.executor": "Run",
+    "JUnit.BookingManagerTest.bookingWhenUnderCapacity.executor": "Run",
+    "JUnit.BookingManagerTest.cancelBooking_WaitlistPromotion.executor": "Run",
+    "JUnit.BookingManagerTest.duplicateBooking_Prevention.executor": "Run",
+    "JUnit.BookingManagerTest.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "ArdanOzekinci",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/ardan/Documents/Documents/Y2 Sem 2/Eng Anal/ENGG1420_FinalProject",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "GitStage.ChangesTree.GroupingKeys": [
+      "directory",
+      "module",
+      "repository"
+    ]
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.CampusEventApplication">
+    <configuration name="CampusEventApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.loginui.CampusEventApplication" />
+      <module name="loginUi" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.loginui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.loginui.Launcher" />
+      <module name="loginUi" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.loginui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookingManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="loginUi" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BookingManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookingManagerTest.bookingWhenOverCapacity_Waitlisted" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="loginUi" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BookingManagerTest" />
+      <option name="METHOD_NAME" value="bookingWhenOverCapacity_Waitlisted" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookingManagerTest.cancelBooking_WaitlistPromotion" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="loginUi" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BookingManagerTest" />
+      <option name="METHOD_NAME" value="cancelBooking_WaitlistPromotion" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookingManagerTest.duplicateBooking_Prevention" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="loginUi" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BookingManagerTest" />
+      <option name="METHOD_NAME" value="duplicateBooking_Prevention" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Phase2Complete" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Phase2Complete" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="Phase2Complete" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <module name="Phase2Complete" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="RUN_TOOL" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.CampusEventApplication" />
+        <item itemvalue="JUnit.BookingManagerTest.cancelBooking_WaitlistPromotion" />
+        <item itemvalue="JUnit.BookingManagerTest.duplicateBooking_Prevention" />
+        <item itemvalue="JUnit.BookingManagerTest.bookingWhenOverCapacity_Waitlisted" />
+        <item itemvalue="JUnit.BookingManagerTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.240" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="074f94f0-b696-4520-8102-9d77f2f56af4" name="Changes" comment="" />
+      <created>1774544511568</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1774544511568</updated>
+      <workItem from="1774752961506" duration="10443000" />
+      <workItem from="1774826343793" duration="30848000" />
+      <workItem from="1774963587373" duration="5307000" />
+    </task>
+    <task id="LOCAL-00001" summary="- Replaced src/Main.java to load users.csv, events.csv, bookings.csv and provide the full CLI menus.&#10;&#10;- Added src/FileLoader.java to parse the CSVs and populate managers.&#10;&#10;- Added src/BookingManager.java (booking creation/cancellation + waitlist promotion).&#10;&#10;- Replaced src/EventManager.java and src/Event.java to match the CSV/booking model (confirmed/waitlist lists).&#10;&#10;- Replaced src/Booking.java with the CSV-friendly Booking model (id/userId/eventId/createdAt/status).&#10;&#10;- Updated src/User.java, src/Student.java, src/Staff.java, src/Guest.java to include booking limits.&#10;&#10;-CSV data added in the same project root:&#10;      -users.csv&#10;      -events.csv&#10;      -bookings.csv&#10;      &#10;-All 4 JUnit tests added in src/test/java/BookingManagerTest.java&#10;&#10;-Added src/com/example/loginui/eventManagement/* and src/com/example/loginui/waitlistManagement/* with the exact classes required by that test.">
+      <option name="closed" value="true" />
+      <created>1774851566625</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1774851566625</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Fixed module exports and BookingManager tests&#10;&#10;-Exported eventManagement and Waitlist Management in module-info.java so that tests can access those packages&#10;&#10;-Fixed BookingManagerTest to use the instance method promoteFromWaitlistIfPossible and added proper waitlist-promotion assertions.&#10;&#10;-Corrected the LocalDateTime parse string by zero-padding the hour (T09:30).">
+      <option name="closed" value="true" />
+      <created>1774852896825</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1774852896825</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Made UI a lot more modern and fixed UI formatting issues. Just spruced up the UI a bit">
+      <option name="closed" value="true" />
+      <created>1774855002312</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1774855002312</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Made UI a lot more modern and fixed UI formatting issues.">
+      <option name="closed" value="true" />
+      <created>1774855010008</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1774855010008</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Persist CSV data, replace text-menu UIs with dialogs, and refine event input.">
+      <option name="closed" value="true" />
+      <created>1774858919527</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1774858919527</updated>
+    </task>
+    <task id="LOCAL-00006" summary="README.txt updated to match requirements">
+      <option name="closed" value="true" />
+      <created>1774901948090</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1774901948090</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Finished Branch from Ardan Ozekinci">
+      <option name="closed" value="true" />
+      <created>1774964259908</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1774964259908</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="- Replaced src/Main.java to load users.csv, events.csv, bookings.csv and provide the full CLI menus.&#10;&#10;- Added src/FileLoader.java to parse the CSVs and populate managers.&#10;&#10;- Added src/BookingManager.java (booking creation/cancellation + waitlist promotion).&#10;&#10;- Replaced src/EventManager.java and src/Event.java to match the CSV/booking model (confirmed/waitlist lists).&#10;&#10;- Replaced src/Booking.java with the CSV-friendly Booking model (id/userId/eventId/createdAt/status).&#10;&#10;- Updated src/User.java, src/Student.java, src/Staff.java, src/Guest.java to include booking limits.&#10;&#10;-CSV data added in the same project root:&#10;      -users.csv&#10;      -events.csv&#10;      -bookings.csv&#10;      &#10;-All 4 JUnit tests added in src/test/java/BookingManagerTest.java&#10;&#10;-Added src/com/example/loginui/eventManagement/* and src/com/example/loginui/waitlistManagement/* with the exact classes required by that test." />
+    <MESSAGE value="Fixed module exports and BookingManager tests&#10;&#10;-Exported eventManagement and Waitlist Management in module-info.java so that tests can access those packages&#10;&#10;-Fixed BookingManagerTest to use the instance method promoteFromWaitlistIfPossible and added proper waitlist-promotion assertions.&#10;&#10;-Corrected the LocalDateTime parse string by zero-padding the hour (T09:30)." />
+    <MESSAGE value="Made UI a lot more modern and fixed UI formatting issues. Just spruced up the UI a bit" />
+    <MESSAGE value="Made UI a lot more modern and fixed UI formatting issues." />
+    <MESSAGE value="Persist CSV data, replace text-menu UIs with dialogs, and refine event input." />
+    <MESSAGE value="README.txt updated to match requirements" />
+    <MESSAGE value="Finished Branch from Ardan Ozekinci" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished Branch from Ardan Ozekinci" />
+  </component>
+</project>
