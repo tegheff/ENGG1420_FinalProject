@@ -26,9 +26,8 @@
         </rowConstraints>
          <children>
             <Button mnemonicParsing="false" onAction="#openUsers" text="User Management" />
-            <Button mnemonicParsing="false" onAction="#openEvents" text="Event Management" GridPane.columnIndex="1" />
-            <Button mnemonicParsing="false" onAction="#openBookings" text="Booking Management" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#openWaitlist" text="Waitlist Management" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#openEvents" text="Event Management" GridPane.columnIndex="2" />
+            <Button mnemonicParsing="false" onAction="#openBookings" text="Booking Management" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <Button mnemonicParsing="false" onAction="#logout" text="Logout" GridPane.rowIndex="2" />
