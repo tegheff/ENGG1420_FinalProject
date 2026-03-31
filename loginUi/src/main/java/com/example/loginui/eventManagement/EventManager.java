@@ -14,9 +14,16 @@ public class EventManager {
         events = new ArrayList<>();
     }
     
-    public void addEvent(Event e) {
+    public boolean addEvent(Event e) {
+        if (e == null || e.getEventID() == null) {
+            return false;
+        }
+        if (hasEventId(e.getEventID())) {
+            return false;
+        }
         events.add(e);
         AppState.saveAll();
+        return true;
     }
     
     public void listAllEvents() {
@@ -139,6 +146,46 @@ public class EventManager {
         }
 
         return null;
+    }
+
+    public String nextEventId() {
+        int max = 0;
+        int width = 3;
+        for (Event event : events) {
+            if (event == null) {
+                continue;
+            }
+            String id = event.getEventID();
+            if (id == null || !id.startsWith("E")) {
+                continue;
+            }
+            String digits = id.substring(1);
+            if (digits.isEmpty() || !digits.matches("\\d+")) {
+                continue;
+            }
+            width = Math.max(width, digits.length());
+            try {
+                int value = Integer.parseInt(digits);
+                if (value > max) {
+                    max = value;
+                }
+            } catch (NumberFormatException ignored) {
+            }
+        }
+        int next = max + 1;
+        return "E" + String.format("%0" + width + "d", next);
+    }
+
+    private boolean hasEventId(String eventID) {
+        if (eventID == null) {
+            return false;
+        }
+        for (Event event : events) {
+            if (eventID.equals(event.getEventID())) {
+                return true;
+            }
+        }
+        return false;
     }
     public static void main(String[] args) {
         EventManager manager = new EventManager();

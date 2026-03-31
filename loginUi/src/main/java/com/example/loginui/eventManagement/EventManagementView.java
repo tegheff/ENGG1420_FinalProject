@@ -92,6 +92,8 @@ public class EventManagementView {
 
         TextField eventIdField = new TextField();
         eventIdField.setPromptText("Event ID (e.g., E001)");
+        eventIdField.setText(eventManager.nextEventId());
+        eventIdField.setEditable(false);
 
         TextField titleField = new TextField();
         titleField.setPromptText("Title");
@@ -190,8 +192,12 @@ public class EventManagementView {
         });
 
         dialog.showAndWait().ifPresent(event -> {
-            eventManager.addEvent(event);
-            outputArea.appendText("Event added: " + event.getTitle() + "\n");
+            boolean added = eventManager.addEvent(event);
+            if (added) {
+                outputArea.appendText("Event added: " + event.getTitle() + "\n");
+            } else {
+                outputArea.appendText("Event ID already exists. Event not added.\n");
+            }
         });
     }
 

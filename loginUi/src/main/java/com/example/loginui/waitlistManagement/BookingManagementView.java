@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -20,6 +21,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 public class BookingManagementView {
 
@@ -83,25 +85,47 @@ public class BookingManagementView {
     }
 
     private void addBooking() {
+        if (eventManager.getEvents().isEmpty()) {
+            out.appendText("No events available. Add an event first.\n\n");
+            return;
+        }
+
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Add Booking");
         dialog.setHeaderText("Enter booking details");
 
         TextField bookingIdField = new TextField();
         bookingIdField.setPromptText("Booking ID");
+        bookingIdField.setText(bookingManager.nextBookingId());
+        bookingIdField.setEditable(false);
 
         TextField userIdField = new TextField();
         userIdField.setPromptText("User ID");
 
-        TextField eventIdField = new TextField();
-        eventIdField.setPromptText("Event ID");
+        ComboBox<Event> eventBox = new ComboBox<>();
+        eventBox.getItems().addAll(eventManager.getEvents());
+        eventBox.setPromptText("Select Event");
+        eventBox.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(Event event) {
+                if (event == null) {
+                    return "";
+                }
+                return event.getTitle() + " (" + event.getEventID() + ")";
+            }
+
+            @Override
+            public Event fromString(String string) {
+                return null;
+            }
+        });
 
         VBox dialogLayout = new VBox(10);
         dialogLayout.setPadding(new Insets(10));
         dialogLayout.getChildren().addAll(
                 new Label("Booking ID:"), bookingIdField,
                 new Label("User ID:"), userIdField,
-                new Label("Event ID:"), eventIdField
+                new Label("Event:"), eventBox
         );
 
         dialog.getDialogPane().setContent(dialogLayout);
@@ -111,18 +135,14 @@ public class BookingManagementView {
             if (buttonType == ButtonType.OK) {
                 String bookingId = bookingIdField.getText().trim();
                 String userId = userIdField.getText().trim();
-                String eventId = eventIdField.getText().trim();
+                Event event = eventBox.getValue();
 
-                if (bookingId.isEmpty() || userId.isEmpty() || eventId.isEmpty()) {
+                if (bookingId.isEmpty() || userId.isEmpty() || event == null) {
                     out.appendText("All fields are required.\n\n");
                     return;
                 }
 
-                Event event = eventManager.getEventById(eventId);
-                if (event == null) {
-                    out.appendText("Event not found.\n\n");
-                    return;
-                }
+                String eventId = event.getEventID();
 
                 Booking booking = new Booking(
                         bookingId,
@@ -135,7 +155,15 @@ public class BookingManagementView {
                 if (ok) {
                     out.appendText("Booking created. Status: " + booking.getStatusText() + "\n\n");
                 } else {
-                    out.appendText("Failed to create booking.\n\n");
+                    if (bookingManager.bookingIdExistsForEvent(bookingId, eventId)) {
+                        out.appendText("Booking ID already exists for this event. Use a different ID.\n\n");
+                    } else if (bookingManager.isEventCancelled(event)) {
+                        out.appendText("Event is cancelled. Booking not allowed.\n\n");
+                    } else if (bookingManager.hasActiveBookingForUser(event, userId)) {
+                        out.appendText("User already has an active booking for this event.\n\n");
+                    } else {
+                        out.appendText("Failed to create booking.\n\n");
+                    }
                 }
             }
         });

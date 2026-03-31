@@ -45,6 +45,10 @@ public class BookingManager {
         if (event == null || booking == null) {
             return false;
         }
+        if (booking.getBookingID() == null
+                || hasBookingIdForEvent(booking.getBookingID(), event.getEventID())) {
+            return false;
+        }
 
         if (isEventCancelled(event)) {
             return false;
@@ -67,6 +71,10 @@ public class BookingManager {
 
     public void addBookingDirect(Booking booking) {
         if (booking == null) {
+            return;
+        }
+        if (booking.getBookingID() == null
+                || hasBookingIdForEvent(booking.getBookingID(), booking.getEventID())) {
             return;
         }
         allBookings.add(booking);
@@ -202,6 +210,51 @@ public class BookingManager {
         }
 
         return userBookings;
+    }
+
+    public String nextBookingId() {
+        int max = 0;
+        int width = 3;
+        for (Booking booking : allBookings) {
+            if (booking == null) {
+                continue;
+            }
+            String id = booking.getBookingID();
+            if (id == null || !id.startsWith("B")) {
+                continue;
+            }
+            String digits = id.substring(1);
+            if (digits.isEmpty() || !digits.matches("\\d+")) {
+                continue;
+            }
+            width = Math.max(width, digits.length());
+            try {
+                int value = Integer.parseInt(digits);
+                if (value > max) {
+                    max = value;
+                }
+            } catch (NumberFormatException ignored) {
+            }
+        }
+        int next = max + 1;
+        return "B" + String.format("%0" + width + "d", next);
+    }
+
+    public boolean bookingIdExistsForEvent(String bookingID, String eventID) {
+        return hasBookingIdForEvent(bookingID, eventID);
+    }
+
+    private boolean hasBookingIdForEvent(String bookingID, String eventID) {
+        if (bookingID == null || eventID == null) {
+            return false;
+        }
+        for (Booking booking : allBookings) {
+            if (bookingID.equals(booking.getBookingID())
+                    && eventID.equals(booking.getEventID())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void viewEventRoster(Event event) {
